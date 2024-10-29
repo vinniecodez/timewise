@@ -10,7 +10,7 @@ export function normalizePageHash() {
 	const page = window.location.hash.slice(1)
 
 	if (isPageValid(page)) {
-		return hash
+		return page
 	}
 
 	window.location.hash = PAGE_TIMELINE
