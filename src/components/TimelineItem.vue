@@ -24,7 +24,7 @@ const options = [
 	{value: 3, label: 'Training'}
 ]
 
-const selectedActivityId = ref(0)
+const selectedActivityId = ref(1)
 </script>
 
 <template>
