@@ -1,6 +1,6 @@
 <script setup>
-import TimelineItem from '@/components/TimelineItem.vue';
-import { validateTimelineItems } from '@/validators';
+import TimelineItem from '@/components/TimelineItem.vue'
+import { validateTimelineItems } from '@/validators'
 
 defineProps({
   timelineItems: {
@@ -17,7 +17,6 @@ defineProps({
 			<TimelineItem 
 				v-for="timelineItem in timelineItems" 
 				:key="timelineItem.hour"
-				class="relative flex flex-col gap-2 border-t border-gray-200 py-10 px-4"
 				:timeline-item="timelineItem"
 			/>
 		</ul>
