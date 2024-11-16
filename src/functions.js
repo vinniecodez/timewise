@@ -4,10 +4,17 @@ import {
 	MIDNIGHT_HOUR,
 	MINUTES_IN_HOUR,
 	SECONDS_IN_MINUTE,
-	SECONDS_IN_HOUR} 
+	SECONDS_IN_HOUR,
+	MILLISECONDS_IN_SECOND} 
 	from '@/constants'
 import { isPageValid, isNull } from './validators'
 
+export function formatSeconds(seconds) {
+  const date = new Date()
+  date.setTime(Math.abs(seconds) * MILLISECONDS_IN_SECOND)
+  const utc = date.toUTCString()
+  return utc.substring(utc.indexOf(':') - 2, utc.indexOf(':') + 6)
+}
 
 export function normalizePageHash() {
 	const page = window.location.hash.slice(1)
@@ -43,7 +50,8 @@ export function generateTimelineItems() {
 	for (let hour = MIDNIGHT_HOUR; hour < HOURS_IN_DAY; hour++) {
 		timelineItems.push({ 
 			hour,
-			activityId: null
+			activityId: null,
+      activitySeconds: 0
 		})
 	}
 
