@@ -1,14 +1,24 @@
 <script setup>
-import { formatSeconds } from '@/functions';
-import { isActivityValid } from '@/validators';
+import { formatSeconds, getTotalActivitySeconds } from '@/functions';
+import { isActivityValid, validateTimelineItems } from '@/validators';
 
-defineProps({
+const props = defineProps({
 	activity: {
 		required: true,
 		type: Object,
 		validator: isActivityValid
-	}
+	},
+	timelineItems: {
+    required: true,
+    type: Array,
+		validator: validateTimelineItems
+  },
 })
+
+const seconds = formatSeconds(
+	getTotalActivitySeconds(props.activity, props.timelineItems) - 
+	props.activity.secondsToComplete
+)
 </script>
 
 <template>
@@ -16,6 +26,6 @@ defineProps({
 		class="flex items-center rounded bg-purple-100 px-2 
 		font-mono text-xl text-purple-600"
 	>
-		{{ formatSeconds(activity.secondsToComplete) }}
+		{{ seconds }}
 	</div>
 </template>
