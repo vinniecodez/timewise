@@ -1,38 +1,25 @@
 <script setup>
-import { 
-	isActivityValid, 
-	isHourValid, 
-	isNumber, 
-	isTimelineItemValid, 
-	validateActivities, 
-	validateSelectOptions 
-} from '@/validators'
+import { inject } from 'vue'
+import { isActivityValid, isHourValid, isTimelineItemValid} from '@/validators'
 import BaseSelect from './BaseSelect.vue'
 import TimelineStopwatch from './TimelineStopwatch.vue'
 import TimelineHour from './TimelineHour.vue'
 
-const props = defineProps({
+defineProps({
   timelineItem: {
     required: true,
     type: Object,
 		validator: isTimelineItemValid
-  },
-	activities: {
-		required: true,
-		type: Array,
-		validator: validateActivities
-	},
-	activitySelectOptions: {
-		required: true,
-		type: Array,
-		validator: validateSelectOptions
-	}
+  }
 })
 
 const emit = defineEmits({
 	selectActivity: isActivityValid,
 	scrollToHour: isHourValid
 })
+
+const activitySelectOptions = inject('activitySelectOptions')
+const activities = inject('activities')
 
 function selectActivity(id) {
 	emit(
@@ -42,7 +29,7 @@ function selectActivity(id) {
 }
 
 function findActivityById(id) {
-	return props.activities.find((activity) => activity.id === id) || NULLABE_ACTIVITY
+	return activities.find((activity) => activity.id === id) || NULLABE_ACTIVITY
 }
 </script>
 
